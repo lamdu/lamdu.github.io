@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Lamdu : Lamdu - towards the next generation IDE" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Lamdu</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Peaker/lamdu">View on GitHub</a>
+
+          <h1 id="project_title">Lamdu</h1>
+          <h2 id="project_tagline">Lamdu - towards the next generation IDE</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Peaker/lamdu/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Peaker/lamdu/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="project-lamdu" class="anchor" href="#project-lamdu"><span class="octicon octicon-link"></span></a>Project Lamdu</h1>
+
+<p>This project aims to create a "next-generation", "live programming" environment that radically improves the programming experience.</p>
+
+<p>The main idea behind the Lamdu project is that the canonical representation of programs should not be text, but rich data structures: Abstract syntax trees.</p>
+
+<p>Our programming tools, UIs and ecosystems should take advantage and expose this structure. This has some far-reaching implications, which will be described below.</p>
+
+<h2>
+<a name="programming-language" class="anchor" href="#programming-language"><span class="octicon octicon-link"></span></a>Programming Language</h2>
+
+<p>We believe the Haskell language is a great language for rapid development of reliable programs, due to 2 main traits:</p>
+
+<h3>
+<a name="effect-typing" class="anchor" href="#effect-typing"><span class="octicon octicon-link"></span></a>Effect typing</h3>
+
+<p>Haskell has explicit type-level separation of effectful components from pure components.
+Real Haskell programs demonstrate that the majority of code can be written as pure components.
+This allows a live environment to actually execute code as it is being edited, safely, and bring the benefits of spreadsheets to general purpose programming.</p>
+
+<h3>
+<a name="rich-and-powerful-type-system" class="anchor" href="#rich-and-powerful-type-system"><span class="octicon octicon-link"></span></a>Rich and powerful type system</h3>
+
+<p>Haskell has one of the richest and most powerful type systems, which allows a smart IDE to guide the programmer quickly through the space of type-correct programs. In practice, this reduces much of the cognitive burden of writing programs and the number of input gestures/keystrokes required to write or edit programs.</p>
+
+<h3>
+<a name="why-not-haskell" class="anchor" href="#why-not-haskell"><span class="octicon octicon-link"></span></a>Why not Haskell</h3>
+
+<p>Haskell was designed for textual editing. The Programming Language for Lamdu is optimized for rich structural editing.</p>
+
+<p>Therefore, Lamdu implements a programming language very similar to Haskell, with some modifications.</p>
+
+<h4>
+<a name="explicit-argument-names" class="anchor" href="#explicit-argument-names"><span class="octicon octicon-link"></span></a>Explicit argument names</h4>
+
+<p>In order to present explicit argument names for most function applications, records are used for conventional parameters. This means that the Lamdu programming language does not conventionally use currying. Haskell's use of currying affords very concise notation for partial function application, which is a wonderful feature. In a rich IDE, however, partial application can be visualized and edited concisely without currying.</p>
+
+<h4>
+<a name="explicit-type-variables" class="anchor" href="#explicit-type-variables"><span class="octicon octicon-link"></span></a>Explicit type variables</h4>
+
+<p>Haskell, like most Hindley Milner languages, hides the type-variable lambdas from types and type variable applications/instantiations in use-sites. In Lamdu, the same hiding can be done at the UI level, while making the underlying language simpler. It also allows explicitly specifying type variable instantiations in a simple way.</p>
+
+<h4>
+<a name="structural-type-system" class="anchor" href="#structural-type-system"><span class="octicon octicon-link"></span></a>Structural type system</h4>
+
+<p>This isn't strictly about the textual paradigm, but we believe that a structural type system (with anonymous products and sums) should help providing more precise types for intermediate expressions, leveraging the type system more powerfully.</p>
+
+<h2>
+<a name="lamdu-benefits" class="anchor" href="#lamdu-benefits"><span class="octicon octicon-link"></span></a>Lamdu Benefits</h2>
+
+<h3>
+<a name="no-syntax-errors" class="anchor" href="#no-syntax-errors"><span class="octicon octicon-link"></span></a>No Syntax errors</h3>
+
+<p>Editing programs as rich structures means there are no syntax errors</p>
+
+<h3>
+<a name="incremental-type-errors" class="anchor" href="#incremental-type-errors"><span class="octicon octicon-link"></span></a>Incremental type errors</h3>
+
+<p>Type errors are incremental, meaning that type information available form previous, valid states of the program is available to provide better, more localized type errors.</p>
+
+<p>Incremental type checking is much cheaper than full recompilation as featured by mainstream IDE's, allowing a snappy experience.</p>
+
+<p>Type error feedback is immediate, while the edit is still fresh in the programmer's mind.</p>
+
+<p>Type errors are confined and localized to the sub-expression involved, made simple and comprehensible.</p>
+
+<p>Type information is not lost when type errors exist, allowing the IDE to guide the programmer in resolving type errors intelligently.</p>
+
+<h3>
+<a name="better-completions" class="anchor" href="#better-completions"><span class="octicon octicon-link"></span></a>Better completions</h3>
+
+<p>When types are rich enough, much of the program structure can be inferred from the types.</p>
+
+<p>This affords significantly more powerful and intelligent completions than found in mainstream IDE's.</p>
+
+<h3>
+<a name="live-execution" class="anchor" href="#live-execution"><span class="octicon octicon-link"></span></a>Live execution</h3>
+
+<p>Frees the programmer from having to trace code execution in their head.</p>
+
+<p>Debugging pure code means expanding sub-expressions that have the wrong result, and following through the sub-expressions that contain the mistakes. This should be a much easier experience than stepping through code.</p>
+
+<h3>
+<a name="safe-refactoring" class="anchor" href="#safe-refactoring"><span class="octicon octicon-link"></span></a>Safe refactoring</h3>
+
+<p>The IDE has much stronger guarantees about the meaning and structure of the code. This allows refactoring to be <em>completely</em> safe.</p>
+
+<p>Safe refactoring allows programmers to keep the code tidy, without fear of regressions.</p>
+
+<h3>
+<a name="better-collaboration" class="anchor" href="#better-collaboration"><span class="octicon octicon-link"></span></a>Better Collaboration</h3>
+
+<p>One of the most difficult things about collaborative development is handling merge conflicts.</p>
+
+<p>The vast majority of merge conflicts are results of non-functional changes: Renames, reformatting, textual movement of code lines between files, etc.</p>
+
+<p>In Lamdu, "names", the "position" of the code and other non-functional aspects of code are separate from the code itself, and avoid conflicts.</p>
+
+<h4>
+<a name="rename-conflicts" class="anchor" href="#rename-conflicts"><span class="octicon octicon-link"></span></a>Rename conflicts</h4>
+
+<p>To get a conflict due to "rename" operations, two developers must rename the same variable to two different names. Even then, the code is still executable, but its on-screen rendering will display a localized conflict.</p>
+
+<h4>
+<a name="formatting-conflicts" class="anchor" href="#formatting-conflicts"><span class="octicon octicon-link"></span></a>Formatting conflicts</h4>
+
+<p>Formatting is automatic, so there is no way to generate a conflict.</p>
+
+<h4>
+<a name="code-movement-conflicts" class="anchor" href="#code-movement-conflicts"><span class="octicon octicon-link"></span></a>Code movement conflicts</h4>
+
+<p>The "position" of code is meta-data attached to the code, helping to find that code and position its rendering.</p>
+
+<p>Since code is not structured into text files, code "position" conflicts are similarly less harmful, less likely and localized.</p>
+
+<h4>
+<a name="change-tracking" class="anchor" href="#change-tracking"><span class="octicon octicon-link"></span></a>Change tracking</h4>
+
+<p>Instead of heuristically guessing what changed in the code, as traditional version control systems do, Lamdu uses an integrated revision control system and records the changes by the programmer as revisions.</p>
+
+<p>This acts as a record of the developer's intent, allowing the RCS to distinguish, for example, between function deletion and writing of a similar function, and the modification of that same function.  This record of intent will be helpful in preventing and resolving conflicts later.</p>
+
+<h3>
+<a name="bringing-haskell-to-the-masses" class="anchor" href="#bringing-haskell-to-the-masses"><span class="octicon octicon-link"></span></a>Bringing Haskell* to the masses</h3>
+
+<p>We believe the main thing that prevents the masses from using a Haskell-like language, is a difficult learning experience and lack of good tooling.</p>
+
+<h4>
+<a name="beginners" class="anchor" href="#beginners"><span class="octicon octicon-link"></span></a>Beginners</h4>
+
+<p>By removing syntax errors, having a discoverable set of valid program transformations, radically simplifying type errors, giving immediate feedback on editing and visualizing execution, learnability drastically improves.</p>
+
+<h4>
+<a name="experts" class="anchor" href="#experts"><span class="octicon octicon-link"></span></a>Experts</h4>
+
+<p>By creating a state-of-the-art, powerful IDE that out-rivals existing IDEs for mainstream languages, we can appeal to the experts, as well.</p>
+
+<h3>
+<a name="regression-debugging" class="anchor" href="#regression-debugging"><span class="octicon octicon-link"></span></a>Regression Debugging</h3>
+
+<p>Integrated revision control and live test cases will allow "Regression Debugging".</p>
+
+<p>When a change causes a regression, the root of the problem can be found quickly, by finding the deepest function application whose result value diverged from the correct version of the code.</p>
+
+<h3>
+<a name="automatic-formatting-and-sugaring" class="anchor" href="#automatic-formatting-and-sugaring"><span class="octicon octicon-link"></span></a>Automatic Formatting and Sugaring</h3>
+
+<p>Lamdu attempts to take away as much inconsequential freedom from the developer, to free his mind and his key strokes to deal with the parts that matter in the code. Thus, Lamdu does not provide means to edit formatting on a case-by-case basis. Generalized changes to layout rules can be provided, instead.</p>
+
+<p>Additionally, to avoid further stylistic dillemas, Lamdu uses automatic sugaring of code, as a duel of the typical "de-sugaring" done by textual languages.</p>
+
+<p>The code is edited and displayed in its sugared form. The edits to this form are translated to lower-level, simpler edits of the stored language, which is de-sugared.  Lamdu uses "co-macros" that capture patterns in the lower-level code and automatically sugar it to canonical form. This frees the programmer from worrying about whether to use sugar for each particular case.</p>
+
+<h3>
+<a name="visualization" class="anchor" href="#visualization"><span class="octicon octicon-link"></span></a>Visualization</h3>
+
+<p>Textual languages can have extensible syntax for rendering and parsing values of custom-defined data-types. A rich structural IDE can take this further, and allow defining extensible UI components to render and edit values of custom-defined data-types.</p>
+
+<p>In effect, this allows for more powerful DSL extensions to the language. These DSLs are not just custom data-types and combinators, but also rich UIs with optimized key bindings to work with that DSL.</p>
+
+<p>For example "do notation" can be implemented as a co-macro (see above) to capture the &gt;&gt;= to lambda syntactic form.  Then, a customized UI that edits the "do notation" sugared form can be provided, extending the language.</p>
+
+<p>Similarly, a binary tree implemented may be edited with a rich UI that visualizes the trees. The inputs, outputs and subexpressions with tree-typed values will use such rich visualizations, instead of flat textual renderings.</p>
+
+<h3>
+<a name="transparent-build-process" class="anchor" href="#transparent-build-process"><span class="octicon octicon-link"></span></a>Transparent build process</h3>
+
+<p>Today's tools treat the compiler as an opaque, black box, which may or may not apply a set of optimizations to the source code, with great or catastrophic results. Some experts are aware of tooling options to display the intermediate steps in the compiler in an arcane, difficult-to-understand notation.</p>
+
+<p>We intend to make the build process, including compilation, be an explicit pure transformation of the code into intermediate and final forms. The steps of this transformation can be visualized by the live programming environment similarly to the visualization of execution of all pure code.</p>
+
+<p>This will allow far easier inspection of the optimization process, taking away much of the "magic" involved in getting optimizations to fire properly.</p>
+
+<h1>
+<a name="similar-efforts" class="anchor" href="#similar-efforts"><span class="octicon octicon-link"></span></a>Similar Efforts</h1>
+
+<h2>
+<a name="inventing-on-principle" class="anchor" href="#inventing-on-principle"><span class="octicon octicon-link"></span></a>Inventing on Principle</h2>
+
+<p>Bret Victor presented amazing demos in his <a href="http://vimeo.com/36579366">inspiring talk in January 2012</a>.</p>
+
+<h2>
+<a name="light-table" class="anchor" href="#light-table"><span class="octicon octicon-link"></span></a>Light Table</h2>
+
+<p>Inspired by Bret Victor, <a href="http://www.kickstarter.com/projects/ibdknox/light-table">Light Table</a> by Chris Granger is an IDE for Clojure with a "live coding" REPL.</p>
+
+<p>Chris launched the project at <a href="http://www.kickstarter.com/">Kickstarter</a> at April 2012 and raised more than 300K$ for the project.
+Soon after Chris founded a company, <a href="http://www.kodowa.com/">Kodowa</a>, with Robert Attorri, which joined Y-Combinator's "Summer 2012 batch".</p>
+
+<h2>
+<a name="projucer" class="anchor" href="#projucer"><span class="octicon octicon-link"></span></a>Projucer</h2>
+
+<p><a href="http://www.rawmaterialsoftware.com/viewtopic.php?f=12&amp;t=9793">Projucer</a> by Julian Storer (Jules), also inspired by Bret Victor, is a live programming IDE for C++ using the Juce cross-platform framework.</p>
+
+<p>It integrates with <a href="http://llvm.org/">LLVM</a>'s just-in-time compiler to provide fast compilation and advanced features similar to those in Bret Victor's demos. It aims to be a "Light Table for 'Real Programmers'".</p>
+
+<p>It initially aims to provide live coding specifically to GUIs, but later for other uses, specifically uses in the Audio niches in which Jules and Juce focus on.</p>
+
+<p>The project is not open source and is planned to be a commercial IDE.</p>
+
+<p>The project launched at September 2012, and as of October, Jules said he'll be release an alpha version soon.</p>
+
+<h2>
+<a name="subtext" class="anchor" href="#subtext"><span class="octicon octicon-link"></span></a>Subtext</h2>
+
+<p><a href="http://subtextual.org/">Subtext</a> by Jonathan Edwards is a similar effort from 2004.</p>
+
+<p>In his <a href="http://subtextual.org/demo1.html">Subtext 1</a> demo and talk, Edwards presents a live programming environment of a simple dynamic language.</p>
+
+<p>In his <a href="http://www.subtext-lang.org/subtext2.html">Subtext 2</a> demo, Edwards presents an inspiring way to edit canonical representations of conditional and type-dispatch code.</p>
+
+<p>The Subtext project was the main inspiration for the Lamdu project.</p>
+
+<h2>
+<a name="other-related-links" class="anchor" href="#other-related-links"><span class="octicon octicon-link"></span></a>Other related links</h2>
+
+<ul>
+<li><p><a href="http://www.youtube.com/watch?v=TS1lpKBMkgg">We're doing it all wrong</a> by Paul Phillips: Paul describes his frustrations with Scala and programming general, and describes a vision we believe overlaps with the Lamdu project greatly.</p></li>
+<li><p><a href="http://www.youtube.com/watch?v=pqtqaL_ojpk&amp;feature=plcp">Functional programs that explain their work</a>.</p></li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Lamdu maintained by <a href="https://github.com/Peaker">Peaker</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("Lamdu");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
