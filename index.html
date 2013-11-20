@@ -75,7 +75,7 @@
 
         <h3><a name="incremental-type-errors" class="anchor" href="#incremental-type-errors"><span class="octicon octicon-link"></span></a>Incremental Type Errors</h3>
 
-        <p>Type errors are incremental, meaning that type information available form previous, valid states of the program is available to provide better, more localized type errors.</p>
+        <p>Type errors are incremental, meaning that type information available from previous, valid states of the program is available to provide better, more localized type errors.</p>
 
         <p>Incremental type checking is much cheaper than full recompilation as featured by mainstream IDE's, allowing a snappy experience.</p>
 
@@ -165,7 +165,7 @@
 
         <p>For example "do notation" can be implemented as a co-macro (see above) to capture the &gt;&gt;= to lambda syntactic form.  Then, a customized UI that edits the "do notation" sugared form can be provided, extending the language.</p>
 
-        <p>Similarly, a binary tree implemented may be edited with a rich UI that visualizes the trees. The inputs, outputs and subexpressions with tree-typed values will use such rich visualizations, instead of flat textual renderings.</p>
+        <p>Similarly, a binary tree implementation may be edited with a rich UI that visualizes the trees. The inputs, outputs and subexpressions with tree-typed values will use such rich visualizations, instead of flat textual renderings.</p>
 
         <h3><a name="transparent-build-process" class="anchor" href="#transparent-build-process"><span class="octicon octicon-link"></span></a>Transparent Build Process</h3>
 
@@ -182,7 +182,7 @@
         <br>Here is an intermediate state, where the comparison isn't typed yet, and there is a type error (Bool expected where an Int subexpression is used):
         <img src="http://i.imgur.com/0xXkdVYh.png">
         <br>
-        <br>Starting to write a "fibs" functions, we use "iterate" to generate the infinite list. We do so by using a pair (cur,next) of values that progresses through the fibonacci sequence.
+        <br>Starting to write a "fibs" definition, we use the "iterate" function to generate an infinite list. We do so by using a pair (cur,next) of values that progresses through the fibonacci sequence.
         We type in the pair in the "initial" argument of "iterate", and online type inference figures out the type of "step". This allows it to make a very intelligent completion that fills out a lambda that takes and returns the correct pair type, with holes for the result values within the pair:
         <br><img src="http://i.imgur.com/FnjrIEX.png">
         <br>
