@@ -174,22 +174,22 @@
         <h2><a name="lamdu-screenshots" class="anchor" href="#lamdu-screenshots"><span class="octicon octicon-link"></span></a>Lamdu Screenshots</h2>
 
         An euler1 function displayed in the editor in its final form:
-        <br><img src="http://i.imgur.com/PpwH2Ehh.png">
+        <br><img src="http://i.imgur.com/U4e8HE8.png">
         <br>Here is an intermediate state, where the comparison isn't typed yet, and there is a type error (Bool expected where an Int subexpression is used):
-        <img src="http://i.imgur.com/0xXkdVYh.png">
+        <img src="http://i.imgur.com/QW3QOxm.png">
         <br>
         <br>Starting to write a "fibs" definition, we use the "iterate" function to generate an infinite list. We do so by using a pair (cur,next) of values that progresses through the fibonacci sequence.
         We type in the pair in the "initial" argument of "iterate", and online type inference figures out the type of "step". This allows it to make a very intelligent completion that fills out a lambda that takes and returns the correct pair type, with holes for the result values within the pair:
-        <br><img src="http://i.imgur.com/FnjrIEX.png">
+        <br><img src="http://i.imgur.com/oHBLE4H.png">
         <br>
         <br>After choosing this completion, we just type "n" in the "cur" field, and we get a very smart completion as well:
-        <br><img src="http://i.imgur.com/EtEGeXy.png">
+        <br><img src="http://i.imgur.com/bXfPlFu.png">
         <br>
         <br>The online type inference reminds us that we don't want to return an infinite list of pairs, but of numbers, so we add a "map" application on the whole expression, and the final result is:
-        <br><img src="http://i.imgur.com/4ByvAcdh.png">
+        <br><img src="http://i.imgur.com/hfDheU5.png">
         <br>
         <br>A more complicated example, prime factorization:
-        <br><img src="http://i.imgur.com/k80758Wh.png">
+        <br><img src="http://i.imgur.com/bcZrV8m.png">
 
         <h1><a name="similar-efforts" class="anchor" href="#similar-efforts"><span class="octicon octicon-link"></span></a>Similar Efforts</h1>
 
