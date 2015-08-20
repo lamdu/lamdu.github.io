@@ -83,6 +83,39 @@
           </li>
 
           <li>
+            <strong><a name="eager-evaluation" class="anchor" href="#eager-evaluation"><span class="octicon octicon-link"></span></a>Eager evalutation / explicit lazy-evaluation</strong>
+
+            <p>
+              <img src="http://i.imgur.com/EKrwRme.gif"/> <br>
+              The example above uses the logical-or operator (aka "||"),
+              which does not compute the second predicate if the first one is true.
+              In most languages the logical-or operator is built into the language itself
+              (and not its library) as one cannot define it by themselves to not
+              evaluate its right argument when not needed.
+            </p>
+
+            <p>
+              Haskell allows users to define control structures such as logical-or
+              and many others, via its behavior of lazy evaluation -
+              expressions are not evaluated until their value is required.
+            </p>
+
+            <p>
+              But we found that eager evaluation is more fitting to a live programming environment.
+              You want to see the results of your expressions as you write them even
+              if the code using these values wasn't written yet.
+            </p>
+
+            <p>
+              To use eager evaluation but still get the benefits of lazy evaluation
+              (user/library defined control structures and many more)
+              we made the syntax for "deferred computations" (aka functions with no arguments)
+              very lightweight - simply a preceding ◗ symbol.
+              As the user uses the logical-or operator this gets written for them automatically on the operator's right side.
+            </p>
+          </li>
+
+          <li>
             <strong><a name="structural-type-system" class="anchor" href="#structural-type-system"><span class="octicon octicon-link"></span></a>Structural type system</strong>
 
             <p>
