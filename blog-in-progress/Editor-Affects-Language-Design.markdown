@@ -198,8 +198,8 @@ the advantages of tuples available for records.
 Records in Lamdu have the reliability and readability of records
 with the the ease and convenience of tuples.
 
-Thus, tuples are no longer necessary so Lamdu only has records.
-Tuples can still be implemented as degenerate records like C++'s `std::pair`.
+Thus, tuples are no longer necessary so Lamdu only has records
+(tuples can still be implemented as degenerate records like C++'s `std::pair`).
 
 ## Conclusion
 
