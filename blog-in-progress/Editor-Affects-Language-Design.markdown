@@ -1,14 +1,17 @@
 # Designing programming languages with IDEs in mind.
 
 In this post we'll discuss how having the way users write code in mind affects
-the design of programming languages. We will start with a feature called
+the design of programming languages,
+and how it affected our own decisions when designing the langauage for Lamdu.
+
+We will start by discussing a feature called
 [named parameters]((https://en.wikipedia.org/wiki/Named_parameter))
-as an example.
+as a first example.
 
 ## Named parameters
 
 Smalltalk is a programming language with named parameters.
-We'll explain what that means with an example:
+Here's an example to illustrate what that means:
 
 * Smalltalk code looks like this:
   `Rectangle left: 0 right: 10 top: 100 bottom: 200`
@@ -18,19 +21,19 @@ We'll explain what that means with an example:
   `NSMakeRect (0, 100, 10, 100)`
 
 [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk)
-(late 1970s) was designed to be used via its
+was designed to be used via its
 [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment),
 which was released with it
 (an editor specifically designed to edit code in Smalltalk).
 
 The C code can be written on a whiteboard more quickly than Smalltalk,
-but writing them on the computer takes the same effort -
-when using Smalltalk's editor the argument names were auto-completed.
+but writing the code on the computer takes the same effort for both languages -
+when using Smalltalk's editor the argument names are auto-completed.
 
 Which version of the code is easier to read? We're favoring Smalltalk.
 What does each of the four variable in C mean?
 Left? Right? Width? Height? Center positions?
-Only a programmer already familiar with that library function
+Only a programmer who is already familiar with that library function
 will know what they mean without needing to have a look at the documentation.
 This makes C require a steeper learning curve than Smalltalk,
 where the named parameters make the code
@@ -38,14 +41,14 @@ where the named parameters make the code
 
 ### Right vs right
 
-We believe Smalltalk's designers made
+We believe that Smalltalk's designers made
 the right design choice for function call syntax,
 but that the designers of C have also made the right design choice.
 
 How can that be?
 When C was released in the early 1970s people used
 generic text editors to edit C code.
-And typing the parameter names in a generic text editor does take more effort.
+And typing the parameter names in a generic text editor does take effort.
 
 Programming language designers should have their users and the environment
 that they are going to use in mind when designing the language.
@@ -55,18 +58,18 @@ given that their users used generic text editors
 
 ### IDEs helping after the fact
 
-IDEs certainly help editing C and its offspring languages
+IDEs certainly help editing C and other languages deriving from it
 ([C++](https://en.wikipedia.org/wiki/C%2B%2B),
 [C#](https://en.wikipedia.org/wiki/C_Sharp_\(programming_language\)),
 [Java](https://en.wikipedia.org/wiki/Java_\(programming_language\)),
 [JavaScript](https://en.wikipedia.org/wiki/JavaScript),
 and more).
 
-Some editors display popups when hovering on function calls
+Some editors display popups when hovering over function calls
 to show the function's documentation.
 That's certainly useful, but the Smalltalk reading experience
 is still superior, as one can simply glance with their eyes instead of moving
-the mouse and reading what pops up.
+the mouse pointer and reading what pops up.
 This also makes for an easier pair/group programming experience,
 as programmers not holding the mouse still get the relevant info.
 
@@ -102,7 +105,7 @@ In Lamdu:
   "Verbose" presentation mode (named parameters),
   or be verbose on all function arguments except the first one ("OO" mode).
 
-## More design choices
+## More language design choices with the IDE in mind
 
 After discussing named parameters as an example to the general concept,
 we'll briefly present more language design choices we made for Lamdu,
@@ -122,19 +125,19 @@ Again, we'll explain what this means with a code example.
 
 In all examples above, the
 ["logical-or"](https://en.wikipedia.org/wiki/Logical_disjunction)
-operator (`||`/`or`),
+operator (`||`/`or`)
 [short-circuits](https://en.wikipedia.org/wiki/Short-circuit_evaluation).
 That means that the computation on its right hand side does not get evaluated
 if the expression on its left hand side evaluates to `True`.
 
 First let's describe the difference between the Haskell and C++ examples above,
-which look exactly the same:
+which on the surface look exactly the same:
 * In C++ the `||` operator is a built-in language primitive
-  and such operators cannot be defined by users and libraries.
+  and such operators cannot be defined by users or libraries.
   In C, user-defined operators do not support short-circuiting
   (The same holds for Python).
-* In Haskell, the `||` operator is defined in the standard library and can be
-  reimplemented by users. Haskell supports this because it has
+* In Haskell, the `||` operator is actually defined in the standard library
+  (so it can be implemented by users). Haskell supports this because it has
   "pervasive lazyness" - this means that expressions only get evaluated
   when their values are needed.
   Instead of getting the values of the arguments to a function, it actually
@@ -144,10 +147,10 @@ which look exactly the same:
 While Haskell's use of lazy evaluation allows
 defining control structures in the library,
 this feature doesn't come free of disadvantages,
-and that's why this feature isn't common in programming languages.
+and that's why it isn't a common feature in programming languages.
 
 For Lamdu we made a different choice, which also happens to be the same choice
-made in Smalltalk: support lazy evaluation, but not automatically everywhere.
+made in Smalltalk: support lazy evaluation, but not implicitly and everywhere.
 
 The logical-or operator in Lamdu gets a boolean on its left side, and a
 "deferred computation" (aka function with no arguments)
@@ -155,15 +158,57 @@ of a boolean on its right side.
 The syntax for these computations is very lightweight -
 the `◗` symbol preceding the computation,
 with parenthesis for disambiguation when necessary
-(the Smalltalk syntax is square brackets around the expression).
+(the Smalltalk syntax for this is square brackets around the expression).
 
 This choice does not make writing code harder -
-the editor completes the pattern of `_ || ◗ _` automatically.
+Lamdu's editor completes the pattern of `_ || ◗ _` automatically.
 
 ### Ad-hoc records
 
-In most statically types languages,
-[records/structs](https://en.wikipedia.org/wiki/Record_(computer_science))
-need to be declared "ceremoniously" before they are used,
-and to avoid this effort for one-off uses, some languages also support
-anonymous tuples (`(a, b)` in Haskell, `std::pair<a, b>` in C++).
+Let's again start with an example.
+Let's say we have a function that performs a calculation and returns two values:
+"speed" and "azimuth".
+
+In most programming languages, we may either return an anonymous tuple
+`(speed, azimuth)` or declare a
+[record type](https://en.wikipedia.org/wiki/Record_(computer_science))
+for them.
+Each approach has its pros and cons:
+
+* Pro for Tuples: We don't need to remember the exact name of the field -
+  whether it was "azimuth" or maybe "angle"?
+  An IDE would solve this problem by offering field name completions.
+* Pro for Tuples: We avoid the laborious type declaration ceremony.
+  However in a language which has a
+  [structual type system](https://en.wikipedia.org/wiki/Structural_type_system)
+  with
+  [type inference](https://en.wikipedia.org/wiki/Type_inference),
+  type declarations are not necessary.
+* Pro for Records: With tuples we do need to remember the order of the values,
+  or else we might create a bug by accidentally swapping them.
+* Pro for Records: Using records makes the program more type-safe,
+  and give more info about the function in its
+  [type signature](https://en.wikipedia.org/wiki/Type_signature).
+
+Given that the major disadvantages of records
+can be solved by the IDE and the type system,
+for Lamdu we've decided to go only with records.
+
+We believe that getting rid of truly unnecessary features
+reduces the language learning curve,
+as well as obviates the choice of which way to use,
+thus reducing the programmers' cognitive load.
+
+btw: [OCaml](https://ocaml.org) also supports undeclared records as
+[part of their objects system](https://ocaml.org/learn/tutorials/objects.html#Immediateobjectsandobjecttypes).
+
+## Conclusion
+
+Having an IDE affects the trade-offs of programming language design.
+
+In Lamdu's case, as our aim is to create a "next-gen" IDE,
+and as no programming language was yet designed for such an IDE,
+we've decided to design a new language,
+resembling an existing language (Haskell)
+but with some modifications due to the different design trade-offs given the
+different environment users will use to write the code.
