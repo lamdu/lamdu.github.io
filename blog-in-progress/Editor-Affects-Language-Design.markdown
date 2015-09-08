@@ -2,7 +2,7 @@
 
 In this post we'll discuss how having the way users write code in mind affects
 the design of programming languages,
-and how it affected our own decisions when designing the langauage for Lamdu.
+and how it affected our own decisions when designing the language for Lamdu.
 
 We will start by discussing a feature called
 [named parameters]((https://en.wikipedia.org/wiki/Named_parameter))
@@ -10,23 +10,22 @@ as a first example.
 
 ## Named parameters
 
-Smalltalk is a programming language with named parameters.
+[Smalltalk](https://en.wikipedia.org/wiki/Smalltalk)
+is a programming language with named parameters.
 Here's an example to illustrate what that means:
 
-* Smalltalk code looks like this:
-  `Rectangle left: 0 right: 10 top: 100 bottom: 200`
-* The equivalent in
-  [C](https://en.wikipedia.org/wiki/C_\(programming_language\))
-  looks like this:
-  `NSMakeRect (0, 100, 10, 100)`
+| Language  | Example Code
+|-----------|-----------------------------
+| Smalltalk | `Rectangle left: 0 right: 10 top: 100 bottom: 200`
+| C         | `NSMakeRect (0, 100, 10, 100)`
 
-[Smalltalk](https://en.wikipedia.org/wiki/Smalltalk)
-was designed to be used via its
+Smalltalk was designed to be used via its
 [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment),
 which was released with it
 (an editor specifically designed to edit code in Smalltalk).
 
-The C code can be written on a whiteboard more quickly than Smalltalk,
+The [C](https://en.wikipedia.org/wiki/C_\(programming_language\))
+code can be written on a whiteboard more quickly than Smalltalk,
 but writing the code on the computer takes the same effort for both languages -
 when using Smalltalk's editor the argument names are auto-completed.
 
@@ -116,12 +115,13 @@ be used with its dedicated reference IDE.
 
 Again, we'll explain what this means with a code example.
 
-* Lamdu: `x % 3 == 0 || ◗ x % 5 == 0`
-* [Haskell](https://www.haskell.org):
-  `x % 3 == 0 || x % 5 == 0` (same as Lamdu, but without the `◗` symbol)
-* C++: `x % 3 == 0 || x % 5 == 0` (looks exactly the same as Haskell)
-* Python: `x % 3 == 0 or x % 5 == 0`
-* Smalltalk: ``(x \\ 3) = 0 or: [(x \\ 5) = 0]``
+| Language                           | Example Code
+|------------------------------------|-----------------------------
+| Lamdu                              | `x % 3 == 0 || ◗ x % 5 == 0`
+| [Haskell](https://www.haskell.org) | `x % 3 == 0 || x % 5 == 0`
+| C/C++                              | `x % 3 == 0 || x % 5 == 0`
+| Python                             | `x % 3 == 0 or x % 5 == 0`
+| Smalltalk                          | `(x \\ 3) = 0 or: [(x \\ 5) = 0]`
 
 In all examples above, the
 ["logical-or"](https://en.wikipedia.org/wiki/Logical_disjunction)
@@ -134,15 +134,15 @@ First let's describe the difference between the Haskell and C++ examples above,
 which on the surface look exactly the same:
 * In C++ the `||` operator is a built-in language primitive
   and such operators cannot be defined by users or libraries.
-  In C, user-defined operators do not support short-circuiting
+  In C++, user-defined operators and functions do not support short-circuiting
   (The same holds for Python).
 * In Haskell, the `||` operator is actually defined in the standard library
-  (so it can be implemented by users). Haskell supports this because it has
+  (it can be implemented by users). Haskell supports this because it has
   "pervasive lazyness" - this means that expressions only get evaluated
   when their values are needed.
   Instead of getting the values of the arguments to a function, it actually
   gets ["thunks"](https://en.wikipedia.org/wiki/Thunk),
-  which can be evaluated to get the value when and if it is necessary.
+  which can be evaluated to get the value if and when it is necessary.
 
 While Haskell's use of lazy evaluation allows
 defining control structures in the library,
@@ -170,37 +170,36 @@ Let's say we have a function that performs a calculation and returns two values:
 "speed" and "azimuth".
 
 In most programming languages, we may either return an anonymous tuple
-`(speed, azimuth)` or declare a
+`(speed, azimuth)` or use a
 [record type](https://en.wikipedia.org/wiki/Record_(computer_science))
-for them.
-Each approach has its pros and cons:
+for them. Each approach has its own advantages.
 
-* Pro for Tuples: We don't need to remember the exact name of the field -
+Advantages of tuples:
+* We don't need to remember the exact name of the field -
   whether it was "azimuth" or maybe "angle"?
   An IDE would solve this problem by offering field name completions.
-* Pro for Tuples: We avoid the laborious type declaration ceremony.
-  However in a language which has a
+* We avoid the laborious type declaration ceremony.
+  In a language which has a
   [structual type system](https://en.wikipedia.org/wiki/Structural_type_system)
-  with
-  [type inference](https://en.wikipedia.org/wiki/Type_inference),
+  with [type inference](https://en.wikipedia.org/wiki/Type_inference),
   type declarations are not necessary.
-* Pro for Records: With tuples we do need to remember the order of the values,
-  or else we might create a bug by accidentally swapping them.
-* Pro for Records: Using records makes the program more type-safe,
-  and give more info about the function in its
-  [type signature](https://en.wikipedia.org/wiki/Type_signature).
 
-Given that the major disadvantages of records
+Advantages of records:
+* We don't need to remember the order of the values,
+  so there's no risk of confusing them.
+* In statically types languages, using records makes programs safer by
+  making different things have different types,
+  and also provides more info about functions in their
+  [type signatures](https://en.wikipedia.org/wiki/Type_signature).
+
+Given that the disadvantages of records
 can be solved by the IDE and the type system,
 for Lamdu we've decided to go only with records.
 
-We believe that getting rid of truly unnecessary features
-reduces the language learning curve,
-as well as obviates the choice of which way to use,
+We believe that getting rid of unnecessary features
+reduces the programming language learning curve,
+as well as obviates the choice of which option to use,
 thus reducing the programmers' cognitive load.
-
-btw: [OCaml](https://ocaml.org) also supports undeclared records as
-[part of their objects system](https://ocaml.org/learn/tutorials/objects.html#Immediateobjectsandobjecttypes).
 
 ## Conclusion
 
