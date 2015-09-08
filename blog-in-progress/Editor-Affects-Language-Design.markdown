@@ -163,7 +163,7 @@ with parenthesis for disambiguation when necessary
 This choice does not make writing code harder -
 Lamdu's editor completes the pattern of `_ || ◗ _` automatically.
 
-### Ad-hoc records
+### Records vs tuples
 
 Let's again start with an example.
 Let's say we have a function that performs a calculation and returns two values:
@@ -187,19 +187,19 @@ Advantages of tuples:
 Advantages of records:
 * We don't need to remember the order of the values,
   so there's no risk of confusing them.
-* In statically types languages, using records makes programs safer by
-  making different things have different types,
+* In statically types languages, using records makes programs more reliable by
+  making better use of the type system
+  for distinguishing different things with types,
   and also provides more info about functions in their
   [type signatures](https://en.wikipedia.org/wiki/Type_signature).
 
-Given that the disadvantages of records
-can be solved by the IDE and the type system,
-for Lamdu we've decided to go only with records.
+In Lamdu, the IDE and type system make
+the advantages of tuples available for records.
+Records in Lamdu have the reliability and readability of records
+with the the ease and convenience of tuples.
 
-We believe that getting rid of unnecessary features
-reduces the programming language learning curve,
-as well as obviates the choice of which option to use,
-thus reducing the programmers' cognitive load.
+Thus, tuples are no longer necessary so Lamdu only has records.
+Tuples can still be implemented as degenerate records like C++'s `std::pair`.
 
 ## Conclusion
 
