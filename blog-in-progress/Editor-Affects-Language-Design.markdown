@@ -89,7 +89,7 @@ can make for an even better experience.
   (The Python term is
   [keyword arguments](https://docs.python.org/3.5/glossary.html#term-argument)).
 
-### Lamdu's angle
+### Lamdu's case
 
 In Lamdu we decided to have named parameters, and similarly to SWIFT,
 a function's definition determines how the function calls should be displayed.
@@ -205,9 +205,22 @@ Thus, tuples are no longer necessary so Lamdu only has records
 
 Having an IDE affects the trade-offs of programming language design.
 
-In Lamdu's case, as our aim is to create a "next-gen" IDE,
-and as no programming language was yet designed for such an IDE,
+### Lamdu's case
+
+As our aim is to create a "next-gen" IDE,
+and as no programming language was yet designed for one,
 we've decided to design a new language,
 resembling an existing language (Haskell)
 but with some modifications due to the different design trade-offs given the
 different environment users will use to write the code.
+
+Note that Lamdu's design is not final and is still incomplete.
+We would definitely like feedback on the topics discussed here.
+
+### Generalizing further
+
+When designing a system one should consider how the different
+components interact.
+
+In a future post we'll describe another instance of this -
+how storing code in AST form enables Lamdu's novel approach for type errors.
