@@ -90,11 +90,7 @@ can make for an even better experience.
 ### Lamdu's angle
 
 In Lamdu we decided to have named parameters, and similarly to SWIFT,
-a function's definition determines how the function calls should be displayed
-(We
-[made](https://github.com/lamdu/lamdu/commit/b8f262e6f1c1f986362b87ff0b3b8e0c32f1adbd)
-this choice independently from SWIFT's designers,
-since before SWIFT was introduced in 2014).
+a function's definition determines how the function calls should be displayed.
 
 In Lamdu:
 
@@ -139,11 +135,11 @@ which look exactly the same:
   (The same holds for Python).
 * In Haskell, the `||` operator is defined in the standard library and can be
   reimplemented by users. Haskell supports this because it has
-  "lazy evaluation everywhere". This means that expressions only get evaluated
+  "pervasive lazyness" - this means that expressions only get evaluated
   when their values are needed.
   Instead of getting the values of the arguments to a function, it actually
-  gets [thunks](https://en.wikipedia.org/wiki/Thunk), which can be evaluated to
-  get the value when and if it is necessary.
+  gets ["thunks"](https://en.wikipedia.org/wiki/Thunk),
+  which can be evaluated to get the value when and if it is necessary.
 
 While Haskell's use of lazy evaluation allows
 defining control structures in the library,
