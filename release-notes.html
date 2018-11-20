@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta name="description" content="Lamdu : Lamdu - towards the next generation IDE" />
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <title>Lamdu</title>
+  </head>
+  <body>
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+        <a id="forkme_banner" href="https://github.com/Peaker/lamdu">View on GitHub</a>
+        <a href="/">
+          <h1 id="project_title">
+            Lamdu: an open source live programming environment
+          </h1>
+        </a>
+      </header>
+    </div>
+
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>Release notes</h2>
+
+        <h3 id="v0.7.0">0.7.0 - Lamdu's first release!</h3>
+
+        Initial release of Lamdu, including 7 key features:
+
+        <ul>
+          <li>
+            <strong>WYTIWYS projectional editing</strong>.
+            Projectional editing ensures that syntax errors and name errors are impossible to make,
+            while the What-You-Type-Is-What-You-See text-like interface makes the experience intuitive and familiar.
+            Note that this concept isn't unique to Lamdu -
+            <a href="https://www.jetbrains.com/mps/">MPS</a> also implements a mostly WYTIWYS approach.
+          </li>
+          <li>
+            <strong>A novel UI framework for keyboard oriented editing of rich structured data</strong>,
+            with responsive layout (the code's layout adapts to the screen or window's width)
+            and animations for structural edits (making changes easier to follow).
+          </li>
+          <li>
+            <strong>Live-reloading for pure computations</strong>.
+            Lamdu employs a distinction between pure computations and effectful code,
+            like <a href="http://haskell.org/">Haskell</a>,
+            and uses this distinction to enable safe live programming,
+            which performs live-reloading only for pure computations,
+            while requiring an explicit action to execute effectful programs.
+          </li>
+          <li>
+            <strong>Live programming with value annotations displayed under subexpressions</strong>
+            (rather than only a single REPL result).
+            Note that <a href="https://llk.media.mit.edu/papers/archive/ch-phd.pdf">Flogo 2</a>
+            appears to be the first project to come up with this notation.
+          </li>
+          <li>
+            <strong>A novel approach for type-errors</strong>:
+            When filling a hole with a term with a mismatching type,
+            it is wrapped in a "fragment" (aka non-empty hole),
+            so that type inference keeps working continuously everywhere.
+          </li>
+          <li>
+            <strong>A novel decentralized solution for cross-module blame assignment for type errors</strong>.
+            For every definition, Lamdu remembers the types for all of its dependencies.
+            When a dependency's type changes, type inference still works with the saved type,
+            with an "update" action offered for the type-mismatch.
+          </li>
+          <li>
+            <strong>Projectional Syntactic Sugar</strong>.
+            The lower-level AST, which we call "Lamdu Calculus", is checked for patterns which are sugared.
+            Sugaring happens automatically, reducing burdens of choice and manual conversion between equivalent syntax forms when making changes.
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+      var pageTracker = _gat._getTracker("Lamdu");
+      pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
+  </body>
+</html>
